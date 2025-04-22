@@ -1,9 +1,30 @@
-import React from 'react'
+import styles from './SummaryLibrary.module.css';
 
-function SummaryLibrary() {
+const SummaryLibrary = () => {
   return (
-    <div>SummaryLibrary</div>
-  )
-}
+    <div className={styles.container}>
 
-export default SummaryLibrary
+      <div className={styles.searchBar}>
+        <input type="text" placeholder="Search summaries by course, topic, or institution" />
+        <button className={styles.searchBtn}>Search</button>
+      </div>
+
+      <div className={styles.filters}>
+        <select>
+          <option>Sort by</option>
+        </select>
+        <select>
+          <option>Filter by</option>
+        </select>
+        <button className={styles.uploadBtn}>Upload Summary</button>
+      </div>
+
+     
+      <div className={styles.cardGrid}>
+       
+      </div>
+    </div>
+  );
+};
+
+export default SummaryLibrary;

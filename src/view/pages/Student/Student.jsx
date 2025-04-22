@@ -1,9 +1,32 @@
-import React from 'react'
+import styles from './Student.module.css';
 
-function Student() {
+const Student = () => {
   return (
-    <div>Student</div>
-  )
-}
+    <div className={styles.container}>
+      <h1>Student Dashboard</h1>
+      <div className={styles.grid}>
+        <div className={styles.card}>
+          <h3>Summaries Uploaded Per Month</h3>
+          {/* LineChart goes here */}
+        </div>
 
-export default Student
+        <div className={styles.card}>
+          <h3>Task Completion Rates</h3>
+          {/* PieChart goes here */}
+        </div>
+
+        <div className={styles.card}>
+          <h3>Most Popular Courses</h3>
+          {/* BarChart goes here */}
+        </div>
+
+        <div className={styles.card}>
+          <h3>Student Engagement Levels</h3>
+          {/* RadarChart goes here */}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Student;

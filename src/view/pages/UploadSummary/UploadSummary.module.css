@@ -1,68 +1,64 @@
 .container {
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    font-family: Arial, sans-serif;
-  }
-  
-  h1 {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 25px;
-    color: #2c3e50;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  input[type="text"],
-  select,
-  textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-  }
-  
-  textarea {
-    resize: vertical;
-    min-height: 80px;
-  }
-  
-  .uploadBox {
-    border: 2px dashed #3498db;
-    border-radius: 6px;
-    padding: 20px;
-    text-align: center;
-    color: #3498db;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .checkbox {
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  button[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type="text"],
+select,
+textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.uploadBox {
+  border: 1px dashed #007bff;
+  padding: 16px;
+  text-align: center;
+  color: #007bff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.checkbox {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}

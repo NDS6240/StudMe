@@ -1,103 +1,93 @@
 .container {
   padding: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f7f9;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
   color: #333;
 }
 
-
 .logo {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
-  color: #3498db;
+  color: #0066cc;
 }
 
 .navLinks {
   display: flex;
-  gap: 25px;
+  gap: 20px;
 }
 
 .navLinks a {
   text-decoration: none;
-  color: #2c3e50;
-  font-weight: 500;
-  transition: color 0.2s ease;
+  color: #333;
+  font-weight: bold;
 }
 
 .navLinks a:hover {
-  color: #007bff;
+  color: #0055aa;
 }
 
 .hero {
-  background-color: #e7f1ff;
-  padding: 80px 20px;
+  background-color: #ddeeff;
+  padding: 60px 15px;
   text-align: center;
 }
 
 .hero h1 {
-  font-size: 42px;
-  color: #2c3e50;
-  margin-bottom: 20px;
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 15px;
 }
 
 .hero p {
-  font-size: 18px;
-  color: #34495e;
-  max-width: 700px;
-  margin: 0 auto 30px;
+  font-size: 16px;
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto 20px;
 }
 
 .ctaButton {
   display: inline-block;
-  background-color: #3498db;
+  background-color: #0066cc;
   color: white;
-  padding: 12px 30px;
+  padding: 10px 24px;
   text-decoration: none;
-  border-radius: 5px;
   font-weight: bold;
-  transition: background-color 0.3s ease;
 }
 
 .ctaButton:hover {
-  background-color: #2980b9;
+  background-color: #004c99;
 }
 
 .features {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
-  padding: 60px 20px;
+  justify-content: center;
+  gap: 15px;
+  padding: 40px 15px;
   background-color: white;
 }
 
 .feature {
-  flex: 1 1 250px;
-  max-width: 300px;
+  flex: 1 1 220px;
+  max-width: 280px;
   text-align: center;
-  padding: 20px;
-  background-color: #f4f7f9;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
-}
-
-.feature:hover {
-  transform: translateY(-10px);
+  padding: 16px;
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
 }
 
 .featureIcon {
-  font-size: 48px;
-  color: #3498db;
-  margin-bottom: 15px;
+  font-size: 36px;
+  color: #0066cc;
+  margin-bottom: 10px;
 }
 
 .feature h3 {
-  margin-bottom: 10px;
-  color: #2c3e50;
+  margin-bottom: 8px;
+  color: #333;
 }
 
 .feature p {
-  color: #34495e;
-  font-size: 14px;
+  color: #555;
+  font-size: 13px;
 }
-

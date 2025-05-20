@@ -20,33 +20,10 @@ h1 {
   gap: 10px;
 }
 
-input[type="text"],
-select,
-textarea {
+input[type="text"] {
   padding: 8px;
   border: 1px solid #ccc;
   font-size: 14px;
-}
-
-textarea {
-  resize: vertical;
-  min-height: 70px;
-}
-
-.uploadBox {
-  border: 1px dashed #007bff;
-  padding: 16px;
-  text-align: center;
-  color: #007bff;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.checkbox {
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
 button[type="submit"] {

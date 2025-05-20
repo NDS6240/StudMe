@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <ul>
-        <h1>EduSync</h1>
+        <h1>StudMe</h1>
         <li>
           <Link to="/">Home</Link>
         </li>

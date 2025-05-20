@@ -18,10 +18,10 @@ function Router() {
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/student" element={<Student />} />
-        <Route path="/new-task" element={<NewTask />} />
-        <Route path="/upload-summary" element={<UploadSummary />} />
-        <Route path="/summary-library" element={<SummaryLibrary />} />
         <Route path="/task-manager" element={<TaskManager />} />
+        <Route path="/new-task" element={<NewTask />} />
+        <Route path="/summary-library" element={<SummaryLibrary />} />
+        <Route path="/upload-summary" element={<UploadSummary />} />
         <Route path="/help-&-settings" element={<Help_And_Settings />} />
       </Routes>
     </>

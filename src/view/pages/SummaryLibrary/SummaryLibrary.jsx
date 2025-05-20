@@ -3,10 +3,11 @@ import { db } from "../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import styles from "./SummaryLibrary.module.css";
+import useRedirectIfNotLoggedIn from "../../hooks/useRedirectIfNotLoggedIn";
 
 const SummaryLibrary = () => {
   const [summaries, setSummaries] = useState([]);
-
+  useRedirectIfNotLoggedIn()
   useEffect(() => {
     const fetchData = async () => {
       const querySnapshot = await getDocs(collection(db, "summaries"));
@@ -29,7 +30,7 @@ const SummaryLibrary = () => {
         />
         <button className={styles.searchBtn}>Search</button>
       </div>
-
+      
       <div className={styles.filters}>
         <select>
           <option>Sort by</option>

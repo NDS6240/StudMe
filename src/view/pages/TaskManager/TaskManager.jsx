@@ -2,31 +2,31 @@ import { useEffect, useState } from "react";
 import styles from "./TaskManager.module.css";
 import {
   collection,
-  addDoc,
   getDocs,
   query,
   where,
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import { db, auth } from "../../../firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { db } from "../../../firebase";
 import { useNavigate } from "react-router-dom";
+import useAuthUser from "../../hooks/useAuthUser";
+import useRedirectIfNotLoggedIn from "../../hooks/useRedirectIfNotLoggedIn";
 
 const TaskManager = () => {
-  const [userId, setUserId] = useState(null);
+  const user = useAuthUser();
+  useRedirectIfNotLoggedIn();
   const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserId(user.uid);
-        loadTasks(user.uid);
-      }
-    });
-    return () => unsubscribe();
-  }, []);
+    if (user === undefined) return; // עדיין טוען
+    if (!user) {
+      navigate("/login");
+    } else {
+      loadTasks(user.uid);
+    }
+  }, [user, navigate]);
 
   const loadTasks = async (uid) => {
     const q = query(collection(db, "tasks"), where("userId", "==", uid));
@@ -37,8 +37,10 @@ const TaskManager = () => {
 
   const handleDelete = async (taskId) => {
     await deleteDoc(doc(db, "tasks", taskId));
-    setTasks(tasks.filter((task) => task.id !== taskId));
+    setTasks((prev) => prev.filter((task) => task.id !== taskId));
   };
+
+  if (user === undefined) return null;
 
   return (
     <div className={styles.container}>

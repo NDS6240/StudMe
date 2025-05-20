@@ -53,9 +53,8 @@
   background-color: #0056b3;
 }
 
-.message {
-  text-align: center;
+.error {
+  color: red;
   font-size: 0.9rem;
-  margin-top: 1rem;
-  color: green;
+  text-align: center;
 }

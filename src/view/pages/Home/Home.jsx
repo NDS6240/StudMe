@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
+import useRedirectIfNotLoggedIn from "../../hooks/useRedirectIfNotLoggedIn";
+
 import {
   collection,
   getDocs,
@@ -12,7 +14,7 @@ import { db, auth } from "../../../firebase";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
-
+  useRedirectIfNotLoggedIn();
   useEffect(() => {
     const userId = auth.currentUser?.uid;
     if (!userId) return;

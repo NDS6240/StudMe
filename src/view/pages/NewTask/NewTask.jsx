@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./NewTask.module.css";
 import { collection, addDoc } from "firebase/firestore";
 import { db, auth } from "../../../firebase";
+import useRedirectIfNotLoggedIn from "../../hooks/useRedirectIfNotLoggedIn";
 import { useNavigate } from "react-router-dom";
 
 const NewTask = () => {
@@ -11,6 +12,15 @@ const NewTask = () => {
   const [priority, setPriority] = useState("Medium");
   const [notes, setNotes] = useState("");
   const navigate = useNavigate();
+  useRedirectIfNotLoggedIn()
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (!user) {
+        navigate("/login");
+      }
+    });
+    return () => unsubscribe();
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

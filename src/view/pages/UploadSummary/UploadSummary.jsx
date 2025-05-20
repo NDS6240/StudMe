@@ -3,6 +3,7 @@ import { db } from "../../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import styles from "./UploadSummary.module.css";
 import { useNavigate } from "react-router-dom";
+import useRedirectIfNotLoggedIn from "../../hooks/useRedirectIfNotLoggedIn";
 
 const UploadSummary = () => {
   const [title, setTitle] = useState("");
@@ -10,7 +11,7 @@ const UploadSummary = () => {
   const [fileURL, setFileURL] = useState("");
   const [uploading, setUploading] = useState(false);
   const navigate = useNavigate();
-
+  useRedirectIfNotLoggedIn()
   const handleSubmit = async (e) => {
     e.preventDefault();
 

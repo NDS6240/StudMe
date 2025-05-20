@@ -7,8 +7,7 @@
   justify-content: space-between;
   font-family: Arial, sans-serif;
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #3498db;
+
   flex-wrap: wrap;
 }
 
@@ -22,7 +21,7 @@
 
 .navbar a {
   text-decoration: none;
-  color: #2c3e50;
+
   font-weight: 500;
   transition: color 0.2s ease;
 }
@@ -31,7 +30,7 @@
   color: #007bff;
 }
 
-/* Mobile styles */
+
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -64,4 +63,12 @@
 .logo {
   height: 40px;
   width: auto;
+}
+.navLink {
+  all: unset;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  padding: 0.5rem;
 }

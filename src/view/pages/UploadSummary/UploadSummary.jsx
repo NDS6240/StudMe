@@ -2,12 +2,14 @@ import { useState } from "react";
 import { db } from "../../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import styles from "./UploadSummary.module.css";
+import { useNavigate } from "react-router-dom";
 
 const UploadSummary = () => {
   const [title, setTitle] = useState("");
   const [course, setCourse] = useState("");
   const [fileURL, setFileURL] = useState("");
   const [uploading, setUploading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +33,7 @@ const UploadSummary = () => {
       setTitle("");
       setCourse("");
       setFileURL("");
+      navigate("/summary-library");
     } catch (err) {
       console.error("Error saving summary:", err);
       alert("Failed to save summary.");

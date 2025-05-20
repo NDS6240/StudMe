@@ -1,0 +1,54 @@
+.appContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.page {
+  padding: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+
+.section {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.center {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .appContainer,
+  .page {
+    padding: 10px;
+  }
+
+  .section {
+    padding: 15px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flex {
+    flex-direction: column;
+  }
+}

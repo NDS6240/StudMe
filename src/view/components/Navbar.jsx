@@ -46,7 +46,7 @@ const Navbar = () => {
 
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">Home Dashboard</Link>
         </li>
         <li>
           <Link to="/upload-summary">Upload Summary</Link>

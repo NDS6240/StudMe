@@ -3,13 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
 import useRedirectIfNotLoggedIn from "../../hooks/useRedirectIfNotLoggedIn";
 
-import {
-  collection,
-  getDocs,
-  query,
-  where,
-  limit,
-} from "firebase/firestore";
+import { collection, getDocs, query, where, limit } from "firebase/firestore";
 import { db, auth } from "../../../firebase";
 
 const Home = () => {
@@ -21,11 +15,7 @@ const Home = () => {
 
     const loadData = async () => {
       const tasksSnap = await getDocs(
-        query(
-          collection(db, "tasks"),
-          where("userId", "==", userId),
-          limit(9)
-        )
+        query(collection(db, "tasks"), where("userId", "==", userId), limit(9))
       );
       const tasksData = tasksSnap.docs.map((doc) => doc.data());
       setTasks(tasksData);
@@ -39,7 +29,8 @@ const Home = () => {
       <section className={styles.hero}>
         <h1>Welcome to StudMe</h1>
         <p>
-          Your academic companion – upload summaries, track tasks, and stay on top of your study life.
+          Your academic companion – upload summaries, track tasks, and stay on
+          top of your study life.
         </p>
         <Link to="/summary-library" className={styles.ctaButton}>
           Go to Library
@@ -52,11 +43,17 @@ const Home = () => {
           {tasks.map((task, i) => (
             <div
               key={i}
-              className={`${styles.card} ${styles[`priority_${task.priority?.toLowerCase()}`]}`}
+              className={`${styles.card} ${
+                styles[`priority_${task.priority?.toLowerCase()}`]
+              }`}
             >
               <h3>{task.title}</h3>
-              <p><strong>Course:</strong> {task.course}</p>
-              <p><strong>Due:</strong> {task.dueDate}</p>
+              <p>
+                <strong>Course:</strong> {task.course}
+              </p>
+              <p>
+                <strong>Due:</strong> {task.dueDate}
+              </p>
             </div>
           ))}
         </div>

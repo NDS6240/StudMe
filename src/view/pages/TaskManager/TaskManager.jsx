@@ -20,7 +20,7 @@ const TaskManager = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user === undefined) return; // עדיין טוען
+    if (user === undefined) return; 
     if (!user) {
       navigate("/login");
     } else {

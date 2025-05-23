@@ -7,7 +7,7 @@ import useRedirectIfNotLoggedIn from "../../hooks/useRedirectIfNotLoggedIn";
 
 const SummaryLibrary = () => {
   const [summaries, setSummaries] = useState([]);
-  useRedirectIfNotLoggedIn()
+  useRedirectIfNotLoggedIn();
   useEffect(() => {
     const fetchData = async () => {
       const querySnapshot = await getDocs(collection(db, "summaries"));
@@ -23,25 +23,9 @@ const SummaryLibrary = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.searchBar}>
-        <input
-          type="text"
-          placeholder="Search summaries by course, topic, or institution"
-        />
-        <button className={styles.searchBtn}>Search</button>
-      </div>
-      
-      <div className={styles.filters}>
-        <select>
-          <option>Sort by</option>
-        </select>
-        <select>
-          <option>Filter by</option>
-        </select>
-        <Link to="/upload-summary">
-          <button className={styles.uploadBtn}>Upload Summary</button>
-        </Link>
-      </div>
+      <Link to="/upload-summary">
+        <button className={styles.uploadBtn}>Upload Summary</button>
+      </Link>
 
       <div className={styles.cardGrid}>
         {summaries.map((summary) => (

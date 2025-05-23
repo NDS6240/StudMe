@@ -55,7 +55,6 @@ const TaskManager = () => {
             </div>
           ))}
         </div>
-        <button className={styles.calendarBtn}>View Full Calendar</button>
       </section>
 
       <section className={styles.taskTable}>

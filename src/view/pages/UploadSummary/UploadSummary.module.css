@@ -39,3 +39,10 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #0056b3;
 }
+.form input[type="url"] {
+  background-color: #eef6ff;
+  border: 1px solid #99caff;
+}
+.form input[type="url"]:focus {
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}

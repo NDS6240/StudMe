@@ -7,7 +7,10 @@ import useRedirectIfNotLoggedIn from "../../hooks/useRedirectIfNotLoggedIn";
 
 const SummaryLibrary = () => {
   const [summaries, setSummaries] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
   useRedirectIfNotLoggedIn();
+
   useEffect(() => {
     const fetchData = async () => {
       const querySnapshot = await getDocs(collection(db, "summaries"));
@@ -21,14 +24,28 @@ const SummaryLibrary = () => {
     fetchData();
   }, []);
 
+  const filteredSummaries = summaries.filter((summary) =>
+    (summary.title + " " + summary.course)
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className={styles.container}>
       <Link to="/upload-summary">
         <button className={styles.uploadBtn}>Upload Summary</button>
       </Link>
 
+      <input
+        type="text"
+        placeholder="Search by title or course..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className={styles.searchInput}
+      />
+
       <div className={styles.cardGrid}>
-        {summaries.map((summary) => (
+        {filteredSummaries.map((summary) => (
           <div key={summary.id} className={styles.card}>
             <h3>{summary.title}</h3>
             <p>

@@ -1,12 +1,31 @@
-import React from 'react';
-import Router from './view/components/Router';
+import { Routes, Route } from "react-router-dom";
+import React from "react";
+import Navbar from "./view/components/Navbar";
+import Home from "./view/pages/Home/Home";
+import TaskManager from "./view/pages/TaskManager/TaskManager";
+import NewTask from "./view/pages/NewTask/NewTask";
+import SummaryLibrary from "./view/pages/SummaryLibrary/SummaryLibrary";
+import UploadSummary from "./view/pages/UploadSummary/UploadSummary";
+import Help_And_Settings from "./view/pages/Help_And_Settings/Help_And_Settings";
+import Login from "./view/pages/Auth/Login";
+import SignUp from "./view/pages/Auth/SignUp";
 import './App.css'
-function App() {
+const App = () => {
   return (
     <>
-    <Router/>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/task-manager" element={<TaskManager />} />
+        <Route path="/new-task" element={<NewTask />} />
+        <Route path="/summary-library" element={<SummaryLibrary />} />
+        <Route path="/upload-summary" element={<UploadSummary />} />
+        <Route path="/help-&-settings" element={<Help_And_Settings />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signUp" element={<SignUp />} />
+      </Routes>
     </>
   );
-}
+};
 
 export default App;

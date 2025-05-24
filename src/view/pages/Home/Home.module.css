@@ -104,3 +104,22 @@ h1 {
 .card:hover {
   filter: brightness(0.95);
 }
+.skeletonCard {
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  animation: pulse 1.5s infinite ease-in-out;
+  height: 120px;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #e0e0e0;
+  }
+  50% {
+    background-color: #f0f0f0;
+  }
+  100% {
+    background-color: #e0e0e0;
+  }
+}

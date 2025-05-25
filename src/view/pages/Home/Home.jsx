@@ -19,14 +19,18 @@ const Home = () => {
 
       setLoading(true);
       const tasksSnap = await getDocs(
-        query(collection(db, "tasks"), where("userId", "==", user.uid), limit(9))
+        query(
+          collection(db, "tasks"),
+          where("userId", "==", user.uid),
+          limit(9)
+        )
       );
       const tasksData = tasksSnap.docs.map((doc) => doc.data());
       setTasks(tasksData);
       setLoading(false);
     });
 
-    return () => unsubscribe(); 
+    return () => unsubscribe();
   }, []);
 
   return (
@@ -43,7 +47,8 @@ const Home = () => {
       </section>
 
       <section className={styles.latestSection}>
-        <h2>Tasks</h2>
+        <h2>Upcoming Tasks</h2>
+
         {loading ? (
           <div className={styles.grid}>
             {[...Array(3)].map((_, i) => (
@@ -70,6 +75,11 @@ const Home = () => {
             ))}
           </div>
         )}
+        <div className={styles.buttonWrapper}>
+          <Link to="/new-task" className={styles.ctaButton}>
+            Add New Task
+          </Link>
+        </div>
       </section>
     </div>
   );

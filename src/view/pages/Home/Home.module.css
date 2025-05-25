@@ -31,17 +31,26 @@ h1 {
 }
 
 .ctaButton {
-  background-color: #007bff;
+  background-color: #4a90e2;
   color: white;
-  padding: 10px 20px;
-  border-radius: 6px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-decoration: none;
   font-weight: bold;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease;
+  display: inline-block;
 }
 
 .ctaButton:hover {
-  background-color: #0056b3;
+  background-color: #357ab8;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .latestSection {
@@ -75,6 +84,7 @@ h1 {
 
 .card:hover {
   transform: translateY(-4px);
+  filter: brightness(0.95);
 }
 
 .card h3 {
@@ -88,22 +98,21 @@ h1 {
   font-size: 15px;
   color: #444;
 }
+
 .priority_low {
-  background-color: #e9f7ef; 
+  background-color: #e9f7ef;
   color: #155724;
 }
 
 .priority_medium {
-  background-color: #fff9e6; 
+  background-color: #fff9e6;
   color: #856404;
 }
 
 .priority_high {
-  background-color: #f8d7da; 
+  background-color: #f8d7da;
 }
-.card:hover {
-  filter: brightness(0.95);
-}
+
 .skeletonCard {
   background-color: #e0e0e0;
   border-radius: 8px;

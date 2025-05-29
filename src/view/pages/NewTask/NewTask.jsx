@@ -12,7 +12,7 @@ const NewTask = () => {
   const [priority, setPriority] = useState("Medium");
   const [notes, setNotes] = useState("");
   const navigate = useNavigate();
-  useRedirectIfNotLoggedIn()
+  useRedirectIfNotLoggedIn();
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (!user) {

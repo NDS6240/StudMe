@@ -20,7 +20,7 @@ const TaskManager = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user === undefined) return; 
+    if (user === undefined) return;
     if (!user) {
       navigate("/login");
     } else {
@@ -32,7 +32,12 @@ const TaskManager = () => {
     const q = query(collection(db, "tasks"), where("userId", "==", uid));
     const snapshot = await getDocs(q);
     const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-    setTasks(data);
+
+    const sortedData = data.sort(
+      (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+    );
+
+    setTasks(sortedData);
   };
 
   const handleDelete = async (taskId) => {

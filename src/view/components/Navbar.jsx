@@ -60,7 +60,9 @@ const Navbar = () => {
         <li>
           <Link to="/task-manager">Task Manager</Link>
         </li>
-
+        <il>
+          <Link to="ForumPage">Study Rooms</Link>
+        </il>
         <li>
           <Link to="/help-&-settings">User Settings</Link>
         </li>

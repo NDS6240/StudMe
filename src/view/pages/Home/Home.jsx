@@ -26,7 +26,13 @@ const Home = () => {
         )
       );
       const tasksData = tasksSnap.docs.map((doc) => doc.data());
-      setTasks(tasksData);
+
+      const sortedTasks = tasksData.sort(
+        (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+      );
+
+      setTasks(sortedTasks);
+
       setLoading(false);
     });
 

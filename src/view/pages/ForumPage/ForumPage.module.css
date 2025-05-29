@@ -1,0 +1,33 @@
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+.content {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.formWrapper {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+}
+
+.roomsWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}

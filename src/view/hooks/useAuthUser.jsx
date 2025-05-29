@@ -12,7 +12,9 @@ const useAuthUser = () => {
 
     return () => unsubscribe();
   }, []);
-  console.log(user);
+
+  console.log("Current user:", user);
   return user;
 };
+
 export default useAuthUser;

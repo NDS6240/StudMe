@@ -1,0 +1,55 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.noMessages {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+.input {
+  display: flex;
+  gap: 10px;
+}
+
+.input input {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+}
+
+.input button {
+  padding: 10px 20px;
+  font-weight: bold;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.input button:hover {
+  background-color: #2563eb;
+}

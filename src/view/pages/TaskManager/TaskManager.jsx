@@ -49,6 +49,15 @@ const TaskManager = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.heroImageWrapper}>
+        <img
+          src="/images/task-manager.jpg"
+          alt="Task Manager"
+          className={styles.heroImage}
+        />
+        <h1 className={styles.pageTitle}>Task Manager</h1>
+      </div>
+
       <section className={styles.deadlines}>
         <h2>Upcoming Deadlines</h2>
         <div className={styles.deadlineCards}>

@@ -14,7 +14,8 @@
   padding: 10px 18px;
   cursor: pointer;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 10px;
+  width: 300px;
 }
 
 .cardGrid {
@@ -30,7 +31,7 @@
   background-color: #007bff;
   color: white;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 10px;
   font-weight: bold;
 }
 
@@ -46,4 +47,29 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
+}
+.heroImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 350px; 
+  overflow: hidden;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(65%);
+}
+
+.pageTitle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 2.5rem; 
+  font-weight: bold;
 }

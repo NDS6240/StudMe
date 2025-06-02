@@ -31,3 +31,29 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
 }
+
+.heroImageWrapper {
+  width: 100%;
+  max-width: 1000px;
+  margin: 30px auto 2rem auto;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.heroImage {
+  width: 100%;
+  max-height: 200px;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  object-fit: cover;
+}
+.pageTitle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}

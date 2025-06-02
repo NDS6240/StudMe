@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import styles from "./Home.module.css";
+import { Link, useNavigate } from "react-router-dom";
 import useRedirectIfNotLoggedIn from "../../hooks/useRedirectIfNotLoggedIn";
-
 import { collection, getDocs, query, where, limit } from "firebase/firestore";
 import { db, auth } from "../../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-
+import styles from "./Home.module.css";
 const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [rooms, setRooms] = useState([]);
+  const navigate = useNavigate();
 
   useRedirectIfNotLoggedIn();
 
@@ -32,11 +32,30 @@ const Home = () => {
       );
 
       setTasks(sortedTasks);
-
       setLoading(false);
     });
 
     return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "forums"));
+        let roomList = [];
+        querySnapshot.forEach((doc) => {
+          roomList.push({ id: doc.id, ...doc.data() });
+        });
+
+        const shuffled = roomList.sort(() => 0.5 - Math.random());
+        const selected = shuffled.slice(0, 3);
+        setRooms(selected);
+      } catch (error) {
+        console.error("Error fetching rooms:", error);
+      }
+    };
+
+    fetchRooms();
   }, []);
 
   return (
@@ -84,6 +103,27 @@ const Home = () => {
         <div className={styles.buttonWrapper}>
           <Link to="/new-task" className={styles.ctaButton}>
             Add New Task
+          </Link>
+        </div>
+      </section>
+
+      <section className={styles.latestSection}>
+        <h2>Study Rooms</h2>
+        <div className={styles.grid}>
+          {rooms.map((room) => (
+            <div
+              key={room.id}
+              className={styles.card}
+              onClick={() => navigate(`/chat/${room.id}`)}
+              style={{ cursor: "pointer" }}
+            >
+              <h3>{room.title}</h3>
+            </div>
+          ))}
+        </div>
+        <div className={styles.buttonWrapper}>
+          <Link to="/ForumPage" className={styles.ctaButton}>
+            Go to All Study Rooms
           </Link>
         </div>
       </section>

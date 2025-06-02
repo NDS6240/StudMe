@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import React from "react";
 import Navbar from "./view/components/Navbar";
 import Home from "./view/pages/Home/Home";
@@ -11,24 +11,88 @@ import Login from "./view/pages/Auth/Login";
 import SignUp from "./view/pages/Auth/SignUp";
 import ForumPage from "./view/pages/ForumPage/ForumPage";
 import ChatRoomPage from "./view/pages/Chat/ChatRoomPage/ChatRoomPage";
+import PageWrapper from "./view/components/PageWrapper";
+import { AnimatePresence } from "framer-motion";
 import "./App.css";
+
 const App = () => {
+  const location = useLocation();
+
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/task-manager" element={<TaskManager />} />
-        <Route path="/new-task" element={<NewTask />} />
-        <Route path="/summary-library" element={<SummaryLibrary />} />
-        <Route path="/upload-summary" element={<UploadSummary />} />
-        <Route path="/ForumPage" element={<ForumPage />} />
-        <Route path="/help-&-settings" element={<Help_And_Settings />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signUp" element={<SignUp />} />
-        <Route path="/forum" element={<ForumPage />} />
-        <Route path="/chat/:roomId" element={<ChatRoomPage />} />
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route
+            path="/"
+            element={
+              <PageWrapper>
+                <Home />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/task-manager"
+            element={
+              <PageWrapper>
+                <TaskManager />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/new-task"
+            element={
+              <PageWrapper>
+                <NewTask />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/summary-library"
+            element={
+              <PageWrapper>
+                <SummaryLibrary />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/upload-summary"
+            element={
+              <PageWrapper>
+                <UploadSummary />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/help-&-settings"
+            element={
+              <PageWrapper>
+                <Help_And_Settings />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <PageWrapper>
+                <Login />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/signUp"
+            element={
+              <PageWrapper>
+                <SignUp />
+              </PageWrapper>
+            }
+          />
+
+          <Route path="/ForumPage" element={<ForumPage />} />
+          <Route path="/forum" element={<ForumPage />} />
+          <Route path="/chat/:roomId" element={<ChatRoomPage />} />
+        </Routes>
+      </AnimatePresence>
     </>
   );
 };

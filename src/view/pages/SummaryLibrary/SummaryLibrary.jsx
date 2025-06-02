@@ -32,6 +32,14 @@ const SummaryLibrary = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.heroImageWrapper}>
+  <img
+    src="/images/summary-library.jpg"
+    alt="Summary Library"
+    className={styles.heroImage}
+  />
+  <h1 className={styles.pageTitle}>Summary Library</h1>
+</div>
       <Link to="/upload-summary">
         <button className={styles.uploadBtn}>Upload Summary</button>
       </Link>

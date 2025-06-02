@@ -4,13 +4,11 @@ import {
   getAuth,
   updateEmail,
   updateProfile,
+  updatePassword,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
 } from "firebase/auth";
-import {
-  doc,
-  setDoc,
-  getDoc,
-  getFirestore
-} from "firebase/firestore";
+import { doc, setDoc, getDoc, getFirestore } from "firebase/firestore";
 import styles from "./Help_And_Settings.module.css";
 import useAuthUser from "../../hooks/useAuthUser";
 
@@ -27,7 +25,10 @@ const Help_And_Settings = () => {
     university: "",
     degree: "",
     email: "",
-    password: "",
+    currentPassword: "",
+    newPassword: "",
+    helpSubject: "",
+    helpMessage: "",
   });
 
   const [message, setMessage] = useState("");
@@ -45,7 +46,8 @@ const Help_And_Settings = () => {
           university: userDoc.data()?.university || "",
           degree: userDoc.data()?.degree || "",
           email: user.email || "",
-          password: "",
+          currentPassword: "",
+          newPassword: "",
         });
       }
     };
@@ -71,7 +73,9 @@ const Help_And_Settings = () => {
         age,
         university,
         degree,
-        email
+        email,
+        currentPassword,
+        newPassword,
       } = form;
 
       const fullName = `${firstName} ${lastName}`;
@@ -93,6 +97,15 @@ const Help_And_Settings = () => {
         email,
       });
 
+      if (currentPassword && newPassword) {
+        const credential = EmailAuthProvider.credential(
+          user.email,
+          currentPassword
+        );
+        await reauthenticateWithCredential(user, credential);
+        await updatePassword(user, newPassword);
+      }
+
       setMessage("Details updated successfully ✅");
     } catch (err) {
       setMessage("Error: " + err.message);
@@ -103,10 +116,13 @@ const Help_And_Settings = () => {
 
   return (
     <div className={styles.container}>
-      <form className={styles.form} onSubmit={(e) => {
-        e.preventDefault();
-        handleSave();
-      }}>
+      <form
+        className={styles.form}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSave();
+        }}
+      >
         <h2>User Settings</h2>
 
         <div className={styles.group}>
@@ -170,17 +186,79 @@ const Help_And_Settings = () => {
         </div>
 
         <div className={styles.group}>
-          <label>Password</label>
+          <label>Current Password (to change password)</label>
           <input
             type="password"
-            name="password"
-            value={form.password}
-            disabled
+            name="currentPassword"
+            value={form.currentPassword}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className={styles.group}>
+          <label>New Password</label>
+          <input
+            type="password"
+            name="newPassword"
+            value={form.newPassword}
+            onChange={handleChange}
           />
         </div>
 
         <button type="submit" className={styles.button}>
           Save Changes
+        </button>
+        
+        <hr className={styles.divider} />
+
+        <h3>Need Help?</h3>
+
+        <div className={styles.group}>
+          <label>Subject</label>
+          <input
+            type="text"
+            name="helpSubject"
+            value={form.helpSubject || ""}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className={styles.group}>
+          <label>Describe your issue</label>
+          <textarea
+            name="helpMessage"
+            value={form.helpMessage || ""}
+            onChange={handleChange}
+            rows="4"
+          />
+        </div>
+
+        <button
+          type="button"
+          className={styles.button}
+          onClick={() => {
+            if (!form.helpSubject || !form.helpMessage) {
+              setMessage(
+                "Please fill in subject and message before sending help request."
+              );
+            } else {
+              console.log("Help Request Submitted:", {
+                user: user.email,
+                subject: form.helpSubject,
+                message: form.helpMessage,
+              });
+              setMessage(
+                "Your request has been submitted. We'll get back to you soon."
+              );
+              setForm((prev) => ({
+                ...prev,
+                helpSubject: "",
+                helpMessage: "",
+              }));
+            }
+          }}
+        >
+          Submit Help Request
         </button>
 
         {message && <p className={styles.message}>{message}</p>}

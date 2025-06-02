@@ -5,7 +5,6 @@ import styles from "./NewForumPage.module.css";
 
 const NewForumForm = ({ onCreated }) => {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
 
   const handleCreate = async (e) => {
     e.preventDefault();
@@ -14,12 +13,10 @@ const NewForumForm = ({ onCreated }) => {
     try {
       await addDoc(collection(db, "forums"), {
         title,
-        description,
         createdAt: serverTimestamp(),
       });
 
       setTitle("");
-      setDescription("");
 
       if (onCreated) onCreated();
     } catch (error) {
@@ -35,11 +32,7 @@ const NewForumForm = ({ onCreated }) => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <textarea
-        placeholder="Description (optional)"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
+
       <button type="submit">Create Forum</button>
     </form>
   );

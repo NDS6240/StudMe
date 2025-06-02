@@ -5,7 +5,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import "./SignUp.module.css";
+import styles from "./SignUp.module.css";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({

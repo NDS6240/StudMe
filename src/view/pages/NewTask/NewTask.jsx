@@ -10,7 +10,7 @@ const NewTask = () => {
   const [course, setCourse] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState("Medium");
-  const [notes, setNotes] = useState("");
+
   const navigate = useNavigate();
   useRedirectIfNotLoggedIn();
   useEffect(() => {
@@ -34,7 +34,7 @@ const NewTask = () => {
       course,
       dueDate,
       priority,
-      description: notes,
+
       status: "To Do",
       userId,
     });
@@ -43,7 +43,6 @@ const NewTask = () => {
     setCourse("");
     setDueDate("");
     setPriority("Medium");
-    setNotes("");
     alert("Task saved!");
     navigate("/task-manager");
   };
@@ -91,13 +90,6 @@ const NewTask = () => {
             </label>
           ))}
         </div>
-
-        <label>Notes (Optional)</label>
-        <textarea
-          placeholder="Additional task details"
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-        />
 
         <button type="submit">Save Task</button>
       </form>

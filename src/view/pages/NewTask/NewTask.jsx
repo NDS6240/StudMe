@@ -12,16 +12,11 @@ const NewTask = () => {
   const [priority, setPriority] = useState("Medium");
 
   const navigate = useNavigate();
-  useRedirectIfNotLoggedIn();
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (!user) {
-        navigate("/login");
-      }
-    });
-    return () => unsubscribe();
-  }, [navigate]);
 
+  // Custom hook that redirects to login if no user authenticated.
+  useRedirectIfNotLoggedIn();
+
+  // Validates required fields and creates a new task document in Firestore
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title || !course || !dueDate) return;

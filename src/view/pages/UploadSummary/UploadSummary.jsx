@@ -11,7 +11,12 @@ const UploadSummary = () => {
   const [fileURL, setFileURL] = useState("");
   const [uploading, setUploading] = useState(false);
   const navigate = useNavigate();
-  useRedirectIfNotLoggedIn()
+
+  // Custom hook that redirects to login if no user authenticated.
+  useRedirectIfNotLoggedIn();
+
+  // Validates input fields and uploads summary data to Firestore
+  // Prevents submission if any field is empty
   const handleSubmit = async (e) => {
     e.preventDefault();
 

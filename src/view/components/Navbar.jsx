@@ -4,11 +4,14 @@ import useAuthUser from "../hooks/useAuthUser";
 import { getAuth } from "firebase/auth";
 
 const Navbar = () => {
+  // Custom hook to get the current authenticated user
   const user = useAuthUser();
+
+  // Used to redirect user after logout
   const navigate = useNavigate();
-  console.log("user from useAuthUser", user);
   if (user === undefined) return null;
 
+  // Signs the user out and refreshes the page
   const handleLogout = () => {
     getAuth()
       .signOut()
@@ -49,16 +52,16 @@ const Navbar = () => {
           <Link to="/">Home Dashboard</Link>
         </li>
         <li>
-          <Link to="/upload-summary">Upload Summary</Link>
-        </li>
-        <li>
-          <Link to="/summary-library">Summaries Library</Link>
-        </li>
-        <li>
           <Link to="/new-task">New Task</Link>
         </li>
         <li>
           <Link to="/task-manager">Task Manager</Link>
+        </li>
+        <li>
+          <Link to="/upload-summary">Upload Summary</Link>
+        </li>
+        <li>
+          <Link to="/summary-library">Summaries Library</Link>
         </li>
         <il>
           <Link to="ForumPage">Study Rooms</Link>

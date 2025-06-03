@@ -18,6 +18,9 @@ const ChatBox = ({ forumId, currentUser }) => {
   const [namePrompt, setNamePrompt] = useState("");
 
   useEffect(() => {
+    // Subscribe to the messages collection under the given forum ID.
+    // Messages are ordered by creation time and updated in real time.
+
     if (!forumId) return;
 
     const q = query(
@@ -27,12 +30,16 @@ const ChatBox = ({ forumId, currentUser }) => {
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const data = snapshot.docs.map((doc) => doc.data());
+
+      // When new messages arrive, update the local state
       setMessages(data);
     });
 
     return () => unsubscribe();
   }, [forumId]);
 
+  // Sends a new message to Firestore under the current forum room.
+  // Skips sending if the input is empty.
   const handleSend = async () => {
     if (!text.trim()) return;
 

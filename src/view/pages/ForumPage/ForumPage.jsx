@@ -6,6 +6,8 @@ import styles from "./ForumPage.module.css";
 
 const ForumPage = () => {
   const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+  // Custom hook that redirects to login if no user authenticated.
   useRedirectIfNotLoggedIn();
 
   return (
@@ -16,7 +18,6 @@ const ForumPage = () => {
           alt="Study Rooms"
           className={styles.heroImage}
         />
-       
       </div>
 
       <div className={styles.page}>

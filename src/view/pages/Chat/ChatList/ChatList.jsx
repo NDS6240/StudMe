@@ -8,6 +8,7 @@ const ChatList = ({ refreshTrigger }) => {
   const [forums, setForums] = useState([]);
   const navigate = useNavigate();
 
+  // Fetches all documents from the "forums" collection
   useEffect(() => {
     const fetchForums = async () => {
       const snapshot = await getDocs(collection(db, "forums"));
@@ -15,7 +16,7 @@ const ChatList = ({ refreshTrigger }) => {
       setForums(data);
     };
     fetchForums();
-  }, [refreshTrigger]);
+  }, [refreshTrigger]); // Re-fetch after creating a new room
 
   return (
     <div className={styles.grid}>
@@ -26,6 +27,7 @@ const ChatList = ({ refreshTrigger }) => {
           <div
             key={forum.id}
             className={styles.card}
+            // Redirects to selected chat room
             onClick={() => navigate(`/chat/${forum.id}`)}
           >
             <strong>{forum.title}</strong>

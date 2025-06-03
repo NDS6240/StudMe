@@ -8,12 +8,17 @@ import ChatBox from "../ChatBox/ChatBox";
 import styles from "./ChatRoomPage.module.css";
 
 const ChatRoomPage = () => {
+  // Gets the room ID from the URL
   const { roomId } = useParams();
+
   const currentUser = useAuthUser();
+
+  // Custom hook that redirects to login if no user authenticated.
   useRedirectIfNotLoggedIn();
 
   const [forumTitle, setForumTitle] = useState("Loading...");
 
+  // Fetches forum room title from Firestore using roomId
   useEffect(() => {
     const fetchForum = async () => {
       try {

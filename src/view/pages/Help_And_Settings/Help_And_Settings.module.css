@@ -1,9 +1,11 @@
 .container {
   display: flex;
   justify-content: center;
-  padding: 3rem 1rem;
+  align-items: flex-start;
+  gap: 3rem;
+  padding: 2rem;
+  flex-wrap: wrap;
 }
-
 .form {
   background-color: #fff;
   border-radius: 12px;
@@ -58,4 +60,7 @@
   font-size: 0.9rem;
   margin-top: 1rem;
   color: green;
+}
+.formSection {
+  margin-bottom: 4rem;
 }

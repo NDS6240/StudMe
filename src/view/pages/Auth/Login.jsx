@@ -8,6 +8,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // Updates the form state when user types into input fields
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -23,9 +24,11 @@ const Login = () => {
     const auth = getAuth();
 
     try {
+      // Tries to sign in with Firebase Authentication
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/");
     } catch (err) {
+      // Shows an error if login fails
       setError("Invalid email or password.");
     }
   };
@@ -59,13 +62,16 @@ const Login = () => {
 
         {error && <p className={styles.error}>{error}</p>}
 
-        <button type="submit" className={styles.button}>Log In</button>
+        <button type="submit" className={styles.button}>
+          Log In
+        </button>
         <p className={styles.switchText}>
-  Don't have an account?{" "}
-  <a href="/signUp" className={styles.link}>Sign Up</a>
-</p>
+          Don't have an account?{" "}
+          <a href="/signUp" className={styles.link}>
+            Sign Up
+          </a>
+        </p>
       </form>
- 
     </div>
   );
 };

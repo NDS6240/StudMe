@@ -4,6 +4,7 @@ import { db } from "../../../firebase";
 import styles from "./NewForumPage.module.css";
 
 const NewForumForm = ({ onCreated }) => {
+  // Holds the input value for the new room's title
   const [title, setTitle] = useState("");
 
   const handleCreate = async (e) => {
@@ -13,7 +14,7 @@ const NewForumForm = ({ onCreated }) => {
     try {
       await addDoc(collection(db, "forums"), {
         title,
-        createdAt: serverTimestamp(),
+        createdAt: serverTimestamp(), //Store creation timestamp
       });
 
       setTitle("");

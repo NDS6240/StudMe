@@ -16,10 +16,12 @@ import { AnimatePresence } from "framer-motion";
 import "./App.css";
 
 const App = () => {
+  // Get the route location for animations
   const location = useLocation();
 
   return (
     <>
+      {/* Main Navigation Bar With navigate animation*/}
       <Navbar />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
@@ -87,9 +89,9 @@ const App = () => {
               </PageWrapper>
             }
           />
-
+          {/* Navigation to from list */}
           <Route path="/ForumPage" element={<ForumPage />} />
-          <Route path="/forum" element={<ForumPage />} />
+          {/* Navigate to specific room */}
           <Route path="/chat/:roomId" element={<ChatRoomPage />} />
         </Routes>
       </AnimatePresence>

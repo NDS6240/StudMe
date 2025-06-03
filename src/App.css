@@ -1,3 +1,16 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background-color: #f9fafb;
+  color: #1f2937;
+  line-height: 1.6;
+}
+
 .appContainer {
   max-width: 1200px;
   margin: 0 auto;
@@ -49,17 +62,4 @@
   .flex {
     flex-direction: column;
   }
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: "Inter", "Segoe UI", sans-serif;
-  background-color: #f9fafb;
-  color: #1f2937;
-  line-height: 1.6;
 }

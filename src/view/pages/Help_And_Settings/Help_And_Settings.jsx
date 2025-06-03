@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useRedirectIfNotLoggedIn from "../../hooks/useRedirectIfNotLoggedIn";
 import {
-  getAuth,
   updateEmail,
   updateProfile,
   updatePassword,
@@ -13,9 +12,9 @@ import styles from "./Help_And_Settings.module.css";
 import useAuthUser from "../../hooks/useAuthUser";
 
 const Help_And_Settings = () => {
+  // Custom hook that redirects to login if no user authenticated.
   useRedirectIfNotLoggedIn();
   const user = useAuthUser();
-  const auth = getAuth();
   const db = getFirestore();
 
   const [form, setForm] = useState({
@@ -34,6 +33,7 @@ const Help_And_Settings = () => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    // When user is loaded, attempt to fetch extra profile info and fill the form
     const fetchUserData = async () => {
       if (user) {
         const [first, ...rest] = (user.displayName || "").split(" ");
@@ -48,6 +48,8 @@ const Help_And_Settings = () => {
           email: user.email || "",
           currentPassword: "",
           newPassword: "",
+          helpSubject: "",
+          helpMessage: "",
         });
       }
     };
@@ -107,8 +109,32 @@ const Help_And_Settings = () => {
       }
 
       setMessage("Details updated successfully ✅");
+      alert("Details updated successfully ✅");
     } catch (err) {
       setMessage("Error: " + err.message);
+    }
+  };
+
+  const handleHelpRequest = (e) => {
+    e.preventDefault();
+    if (!form.helpSubject || !form.helpMessage) {
+      setMessage(
+        "Please fill in subject and message before sending help request."
+      );
+    } else {
+      console.log("Help Request Submitted:", {
+        user: user.email,
+        subject: form.helpSubject,
+        message: form.helpMessage,
+      });
+      setMessage(
+        "Your request has been submitted. We'll get back to you soon."
+      );
+      setForm((prev) => ({
+        ...prev,
+        helpSubject: "",
+        helpMessage: "",
+      }));
     }
   };
 
@@ -116,153 +142,125 @@ const Help_And_Settings = () => {
 
   return (
     <div className={styles.container}>
-      <form
-        className={styles.form}
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSave();
-        }}
-      >
-        <h2>User Settings</h2>
-
-        <div className={styles.group}>
-          <label>First Name</label>
-          <input
-            type="text"
-            name="firstName"
-            value={form.firstName}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className={styles.group}>
-          <label>Last Name</label>
-          <input
-            type="text"
-            name="lastName"
-            value={form.lastName}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className={styles.group}>
-          <label>Age</label>
-          <input
-            type="number"
-            name="age"
-            value={form.age}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className={styles.group}>
-          <label>University / College</label>
-          <input
-            type="text"
-            name="university"
-            value={form.university}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className={styles.group}>
-          <label>Field of Study / Degree</label>
-          <input
-            type="text"
-            name="degree"
-            value={form.degree}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className={styles.group}>
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className={styles.group}>
-          <label>Current Password (to change password)</label>
-          <input
-            type="password"
-            name="currentPassword"
-            value={form.currentPassword}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className={styles.group}>
-          <label>New Password</label>
-          <input
-            type="password"
-            name="newPassword"
-            value={form.newPassword}
-            onChange={handleChange}
-          />
-        </div>
-
-        <button type="submit" className={styles.button}>
-          Save Changes
-        </button>
-        
-        <hr className={styles.divider} />
-
-        <h3>Need Help?</h3>
-
-        <div className={styles.group}>
-          <label>Subject</label>
-          <input
-            type="text"
-            name="helpSubject"
-            value={form.helpSubject || ""}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className={styles.group}>
-          <label>Describe your issue</label>
-          <textarea
-            name="helpMessage"
-            value={form.helpMessage || ""}
-            onChange={handleChange}
-            rows="4"
-          />
-        </div>
-
-        <button
-          type="button"
-          className={styles.button}
-          onClick={() => {
-            if (!form.helpSubject || !form.helpMessage) {
-              setMessage(
-                "Please fill in subject and message before sending help request."
-              );
-            } else {
-              console.log("Help Request Submitted:", {
-                user: user.email,
-                subject: form.helpSubject,
-                message: form.helpMessage,
-              });
-              setMessage(
-                "Your request has been submitted. We'll get back to you soon."
-              );
-              setForm((prev) => ({
-                ...prev,
-                helpSubject: "",
-                helpMessage: "",
-              }));
-            }
+      <div className={styles.formWrapper}>
+        <form
+          className={styles.form}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSave();
           }}
         >
-          Submit Help Request
-        </button>
+          <h2>User Settings</h2>
 
-        {message && <p className={styles.message}>{message}</p>}
-      </form>
+          <div className={styles.group}>
+            <label>First Name</label>
+            <input
+              type="text"
+              name="firstName"
+              value={form.firstName}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.group}>
+            <label>Last Name</label>
+            <input
+              type="text"
+              name="lastName"
+              value={form.lastName}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.group}>
+            <label>Age</label>
+            <input
+              type="number"
+              name="age"
+              value={form.age}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.group}>
+            <label>University / College</label>
+            <input
+              type="text"
+              name="university"
+              value={form.university}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.group}>
+            <label>Field of Study / Degree</label>
+            <input
+              type="text"
+              name="degree"
+              value={form.degree}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.group}>
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.group}>
+            <label>Current Password (to change password)</label>
+            <input
+              type="password"
+              name="currentPassword"
+              value={form.currentPassword}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.group}>
+            <label>New Password</label>
+            <input
+              type="password"
+              name="newPassword"
+              value={form.newPassword}
+              onChange={handleChange}
+            />
+          </div>
+
+          <button type="submit" className={styles.button}>
+            Save Changes
+          </button>
+        </form>
+      </div>
+
+      <div className={styles.formWrapper}>
+        <form className={styles.form} onSubmit={handleHelpRequest}>
+          <h3>Need Help?</h3>
+
+          <div className={styles.group}>
+            <label>Subject</label>
+            <input
+              type="text"
+              name="helpSubject"
+              value={form.helpSubject || ""}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.group}>
+            <label>Describe your issue</label>
+            <textarea
+              name="helpMessage"
+              value={form.helpMessage || ""}
+              onChange={handleChange}
+              rows="4"
+            />
+          </div>
+
+          <button type="submit" className={styles.button}>
+            Submit Help Request
+          </button>
+        </form>
+      </div>
+
+      {message && <p className={styles.message}>{message}</p>}
     </div>
   );
 };

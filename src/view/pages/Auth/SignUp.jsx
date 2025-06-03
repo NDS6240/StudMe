@@ -22,6 +22,7 @@ const SignUp = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // Updates the form state as the user types in any input field
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -44,6 +45,7 @@ const SignUp = () => {
       confirmPassword,
     } = formData;
 
+    // Prevents submission if password and confirmation don't match
     if (password !== confirmPassword) {
       return setError("Passwords do not match.");
     }
@@ -55,6 +57,7 @@ const SignUp = () => {
         email,
         password
       );
+      // Set display name after user is created
       await updateProfile(userCredential.user, {
         displayName: `${firstName} ${lastName}`,
       });

@@ -5,15 +5,16 @@ const useAuthUser = () => {
   const [user, setUser] = useState(undefined);
 
   useEffect(() => {
+    // Subscribes to Firebase authentication state changes
+    // Updates local user state when the auth status changes
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-
+    // Clean up the listener on unmount
     return () => unsubscribe();
   }, []);
 
-  console.log("Current user:", user);
   return user;
 };
 

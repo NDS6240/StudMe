@@ -15,19 +15,19 @@ import useRedirectIfNotLoggedIn from "../../hooks/useRedirectIfNotLoggedIn";
 
 const TaskManager = () => {
   const user = useAuthUser();
+
+  // Custom hook that redirects to login if no user authenticated.
   useRedirectIfNotLoggedIn();
   const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user === undefined) return;
-    if (!user) {
-      navigate("/login");
-    } else {
+    if (user && user.uid) {
       loadTasks(user.uid);
     }
-  }, [user, navigate]);
+  }, [user]);
 
+  // Fetches all tasks from Firestore where userId matches current user
   const loadTasks = async (uid) => {
     const q = query(collection(db, "tasks"), where("userId", "==", uid));
     const snapshot = await getDocs(q);

@@ -11,13 +11,17 @@ const Home = () => {
   const [rooms, setRooms] = useState([]);
   const navigate = useNavigate();
 
+  // Custom hook that redirects to login if no user authenticated.
   useRedirectIfNotLoggedIn();
 
+  //Fetches user's Tasks from Firestore DB
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (!user) return;
 
       setLoading(true);
+
+      //Fetch only tasks that created by current user and limit to 9
       const tasksSnap = await getDocs(
         query(
           collection(db, "tasks"),
@@ -37,6 +41,8 @@ const Home = () => {
 
     return () => unsubscribe();
   }, []);
+
+  //Fetches 3 random forum rooms to display
 
   useEffect(() => {
     const fetchRooms = async () => {

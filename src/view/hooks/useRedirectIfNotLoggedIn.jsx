@@ -7,6 +7,7 @@ const useRedirectIfNotLoggedIn = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    //If user is null, redirect to login page
     if (user === null) {
       navigate("/login");
     }

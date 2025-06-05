@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../../firebase";
+import { getAuth } from "firebase/auth";
 import styles from "./NewForumPage.module.css";
 
 const NewForumForm = ({ onCreated }) => {
@@ -11,10 +12,17 @@ const NewForumForm = ({ onCreated }) => {
     e.preventDefault();
     if (!title.trim()) return;
 
+    const user = getAuth().currentUser;
+
     try {
       await addDoc(collection(db, "forums"), {
         title,
-        createdAt: serverTimestamp(), //Store creation timestamp
+        createdAt: serverTimestamp(), // Store creation timestamp
+        createdBy: {
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName || ""
+        }
       });
 
       setTitle("");

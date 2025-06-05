@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { db } from "../../../firebase";
 import { collection, addDoc } from "firebase/firestore";
-import styles from "./UploadSummary.module.css";
 import { useNavigate } from "react-router-dom";
 import useRedirectIfNotLoggedIn from "../../hooks/useRedirectIfNotLoggedIn";
+import { getAuth } from "firebase/auth";
+import styles from "./UploadSummary.module.css";
 
 const UploadSummary = () => {
   const [title, setTitle] = useState("");
@@ -27,12 +28,19 @@ const UploadSummary = () => {
 
     setUploading(true);
 
+    const user = getAuth().currentUser;
+
     try {
       await addDoc(collection(db, "summaries"), {
         title,
         course,
         fileURL,
         createdAt: new Date(),
+        createdBy: {
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName || "",
+        },
       });
 
       alert("Summary added successfully ✅");

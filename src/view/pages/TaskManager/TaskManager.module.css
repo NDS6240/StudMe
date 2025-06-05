@@ -6,9 +6,10 @@
 }
 
 .deadlines {
-  background-color: #f1f1f1;
+  background-color: #d4e8ec;
   padding: 16px;
   border: 1px solid #ccc;
+  border-radius: 10px;
   margin-bottom: 25px;
   position: relative;
 }

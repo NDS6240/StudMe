@@ -5,6 +5,8 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import { doc, setDoc, getDocs, collection } from "firebase/firestore";
+import { db } from "../../../firebase";
 import styles from "./SignUp.module.css";
 
 const SignUp = () => {
@@ -22,12 +24,16 @@ const SignUp = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // Updates the form state as the user types in any input field
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const isPasswordStrong = (password) => {
+    const strongRegex = /^(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
+    return strongRegex.test(password);
   };
 
   const handleSubmit = async (e) => {
@@ -45,21 +51,44 @@ const SignUp = () => {
       confirmPassword,
     } = formData;
 
-    // Prevents submission if password and confirmation don't match
     if (password !== confirmPassword) {
       return setError("Passwords do not match.");
     }
 
+    if (!isPasswordStrong(password)) {
+      return setError(
+        "Password must be at least 8 characters, contain a capital letter and a number."
+      );
+    }
+    // Checking if email already signed
     try {
+      const existingUsers = await getDocs(collection(db, "users"));
+      const exists = existingUsers.docs.some(
+        (doc) => doc.data().email.toLowerCase() === email.toLowerCase()
+      );
+      if (exists) {
+        return setError("Email already exists in our system.");
+      }
+
       const auth = getAuth();
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      // Set display name after user is created
+
       await updateProfile(userCredential.user, {
         displayName: `${firstName} ${lastName}`,
+      });
+
+      await setDoc(doc(db, "users", userCredential.user.uid), {
+        firstName,
+        lastName,
+        age,
+        university,
+        degree,
+        email,
+        isAdmin: false,
       });
 
       navigate("/");

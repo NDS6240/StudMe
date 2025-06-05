@@ -12,6 +12,7 @@ import SignUp from "./view/pages/Auth/SignUp";
 import ForumPage from "./view/pages/ForumPage/ForumPage";
 import ChatRoomPage from "./view/pages/Chat/ChatRoomPage/ChatRoomPage";
 import PageWrapper from "./view/components/PageWrapper";
+import AdminDashboard from "./view/pages/Admin/AdminDashboard";
 import { AnimatePresence } from "framer-motion";
 import "./App.css";
 
@@ -33,6 +34,10 @@ const App = () => {
               </PageWrapper>
             }
           />
+          <Route path="/admin" element={<PageWrapper>
+            <AdminDashboard />
+          </PageWrapper>}>
+          </Route>
           <Route
             path="/task-manager"
             element={

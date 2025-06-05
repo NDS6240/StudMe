@@ -48,7 +48,7 @@ const Navbar = () => {
           {/* Checks user name to welcome or display signin and signup buttons */}
           {user ? (
             <>
-              <li>Hello, {user?.displayName || user?.email || "Guest"}</li>
+              <li>Hello, {user?.displayName || user?.email || "Guest"}!</li>
               <li>
                 <button className={styles.navLink} onClick={handleLogout}>
                   Sign Out

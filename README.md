@@ -1,29 +1,31 @@
 # 📚 StudMe – Academic Study Platform
 
-StudMe is a modern web app that helps students stay organized by:
+**StudMe** is a modern academic platform that helps students and admins manage learning collaboratively:
 
 - ✅ Managing academic tasks
 - ✅ Uploading and browsing study summaries
 - ✅ Creating and chatting in study rooms
-- ✅ Customizing their academic profile
+- ✅ Tracking user statistics via admin dashboard
+- ✅ Customizing academic profile with personal details
 
 ---
 
 ## 🚀 Features
 
 - 🔐 Firebase Authentication (Email/Password)
-- 📝 Firestore database for tasks, forums, and summaries
-- 💬 Real-time chat using Firestore listeners
+- 📝 Firestore database for tasks, forums, summaries & users
+- 📊 Admin dashboard with analytics and permission control
+- 💬 Real-time forum-based discussions
 - 🎨 Responsive UI with smooth animations (Framer Motion)
-- 📦 Built with React + Vite + CSS Modules
+- ⚛️ Built with React + Vite + CSS Modules
 
 ---
 
 ## 🛠️ Installation
 
 ```bash
-git clone https://github.com/your-username/studme.git
-cd studme
+git clone https://github.com/NDS6240/StudMe
+cd StudMe
 npm install
 ```
 
@@ -36,16 +38,16 @@ npm install
 3. Click on **"Web App"** and copy the config values.
 4. Enable **Email/Password** sign-in under **Authentication > Sign-in Method**
 5. In **Firestore Database**, add the following collections:
-   - `tasks`
-   - `forums` (each forum will contain a subcollection called `posts`)
-   - `summaries`
    - `users`
+   - `summaries`
+   - `forums`
+   - `tasks`
 
 ---
 
 ## 📁 Environment Variables
 
-Create a `.env` file in the **root** of the project (next to `vite.config.js`) with this content:
+Create a `.env` file in the **root** of the project:
 
 ```env
 VITE_FIREBASE_API_KEY=your_api_key
@@ -56,10 +58,7 @@ VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
 VITE_FIREBASE_APP_ID=your_app_id
 ```
 
-🛑 Do **not** place `.env` inside `/src`! It must be in the project root.
-
-Make sure to add `.env` to `.gitignore`:
-
+👉 Make sure `.env` is added to `.gitignore`:
 ```
 .env
 ```
@@ -77,20 +76,19 @@ npm run build    # Build for production
 
 ## 👨‍💻 Developer Notes
 
-- Do not expose your Firebase keys publicly.
-- If you change Firebase credentials, restart the dev server.
-- Make sure `.env` is correctly loaded by checking:
-  ```js
-  console.log(import.meta.env.VITE_FIREBASE_API_KEY);
-  ```
+- All data operations are performed via Firebase (client-side)
+- Admin permissions are enforced via `isAdmin` field in `users`
+- For testing, manually set `isAdmin: true` in Firestore for a user
+- Charts are rendered using `recharts`
 
 ---
 
 ## 🧠 Future Improvements
 
-- Add file uploads to summaries
-- Improve user roles and permissions
-- Add notifications and reminders
+- ⬆️ File uploads in summaries (PDF, DOCX)
+- 📩 Notifications and reminders
+- 🛡️ Better role-based access control
+- 🔔 Real-time admin alerts
 
 ---
 
@@ -103,3 +101,5 @@ Coming soon...
 ## 🏷️ License
 
 MIT License © 2025
+
+**All rights reserved to Noam D. Staif**
